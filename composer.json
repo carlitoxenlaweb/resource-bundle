@@ -18,7 +18,7 @@
         "friendsofsymfony/rest-bundle":    "~1.0",
         "jms/serializer-bundle":           "0.12.*",
         "white-october/pagerfanta-bundle": "1.0.*",
-        "sylius/resource-bundle": "dev-master"
+        "sylius/resource-bundle": "0.9.*@dev"
     },
     "autoload": {
         "psr-0": { "Tecnocreaciones\\Bundle\\ResourceBundle": "" }
