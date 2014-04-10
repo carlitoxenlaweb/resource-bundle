@@ -77,4 +77,21 @@ class ResourceController extends BaseResource
             return parent::deleteAction($request);
         }
     }
+    
+    /**
+     * Returns a AccessDeniedHttpException.
+     *
+     * This will result in a 403 response code. Usage example:
+     *
+     *     throw $this->createAccessDeniedHttpException('Permission Denied!');
+     *
+     * @param string    $message  A message
+     * @param \Exception $previous The previous exception
+     *
+     * @return \Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException
+     */
+    public function createAccessDeniedHttpException($message = 'Permission Denied!', \Exception $previous = null)
+    {
+        return new \Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException($message, $previous);
+    }
 }

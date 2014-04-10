@@ -52,5 +52,30 @@ class EntityRepository extends BaseEntityRepository implements ContainerAwareInt
     public function setContainer(ContainerInterface $container = null) {
         $this->container = $container;
     }
+    
+    /**
+     * Get a user from the Security Context
+     *
+     * @return mixed
+     *
+     * @throws \LogicException If SecurityBundle is not available
+     *
+     * @see Symfony\Component\Security\Core\Authentication\Token\TokenInterface::getUser()
+     */
+    public function getUser()
+    {
+        if (!$this->container->has('security.context')) {
+            throw new \LogicException('The SecurityBundle is not registered in your application.');
+        }
 
+        if (null === $token = $this->container->get('security.context')->getToken()) {
+            return null;
+        }
+
+        if (!is_object($user = $token->getUser())) {
+            return null;
+        }
+
+        return $user;
+    }
 }
