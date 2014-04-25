@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * Description of ResourceController
  *
- * @author Carlos Mendoza <inhack20@tecnocreaciones.com.ve>
+ * @author Carlos Mendoza <inhack20@tecnocreaciones.com>
  */
 class ResourceController extends BaseResource
 {
