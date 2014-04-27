@@ -78,4 +78,22 @@ class EntityRepository extends BaseEntityRepository implements ContainerAwareInt
 
         return $user;
     }
+    
+    /**
+     * @param mixed $id
+     *
+     * @return null|object
+     */
+    public function find($id)
+    {
+        if(is_array($id) && $id['id']){
+            $id = $id['id'];
+        }
+        return $this
+            ->getQueryBuilder()
+            ->andWhere($this->getAlias().'.id = '.intval($id))
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
 }
