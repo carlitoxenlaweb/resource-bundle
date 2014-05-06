@@ -94,4 +94,18 @@ class ResourceController extends BaseResource
     {
         return new \Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException($message, $previous);
     }
+    
+    /**
+     * 
+     * @return \Symfony\Component\Security\Core\SecurityContextInterface
+     * @throws \LogicException
+     */
+    protected function getSecurityContext()
+    {
+        if (!$this->container->has('security.context')) {
+            throw new \LogicException('The SecurityBundle is not registered in your application.');
+        }
+
+        return $this->container->get('security.context');
+    }
 }
