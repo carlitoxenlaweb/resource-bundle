@@ -109,7 +109,7 @@ class ResourceController extends BaseResource
         return $this->container->get('security.context');
     }
     
-    protected function trans($id, $parameters = array(), $domain = 'messages')
+    protected function trans($id,array $parameters = array(), $domain = 'messages')
     {
         return $this->get('translator')->trans($id, $parameters, $domain);
     }
