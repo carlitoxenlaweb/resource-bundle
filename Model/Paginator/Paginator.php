@@ -65,7 +65,12 @@ class Paginator extends BasePagerfanta implements ContainerAwareInterface
                 $links['next']['href'] = $this->generateUrl($route, array_merge($parameters, array('page' => $this->getNextPage())));
             }
         }
-        $results = $this->getCurrentPageResults()->getArrayCopy();
+        $pageResult = $this->getCurrentPageResults();
+        if(is_array($pageResult)){
+            $results = $pageResult;
+        }else{
+            $results = $this->getCurrentPageResults()->getArrayCopy();
+        }
         return array(
             '_links' => $links,
             '_embedded' => array(
