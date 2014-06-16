@@ -18,6 +18,7 @@ use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository as BaseEntityRepo
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Security\Core\SecurityContext;
+use Pagerfanta\Adapter\ArrayAdapter;
 
 /**
  * Doctrine ORM driver entity repository.
@@ -95,5 +96,17 @@ class EntityRepository extends BaseEntityRepository implements ContainerAwareInt
             ->getQuery()
             ->getOneOrNullResult()
         ;
+    }
+    
+    /**
+     * Retorna un paginador con valores escalares (Sin hidratar)
+     * @param \Doctrine\ORM\QueryBuilder $queryBuilder
+     * @return \Tecnocreaciones\Bundle\ResourceBundle\Model\Paginator\Paginator
+     */
+    public function getScalarPaginator(\Doctrine\ORM\QueryBuilder $queryBuilder)
+    {
+        $pagerfanta = new \Tecnocreaciones\Bundle\ResourceBundle\Model\Paginator\Paginator(new ArrayAdapter($queryBuilder->getQuery()->getScalarResult()));
+        $pagerfanta->setContainer($this->container);
+        return $pagerfanta;
     }
 }
