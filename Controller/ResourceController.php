@@ -199,4 +199,18 @@ class ResourceController extends BaseResource
     {
         return $this->get('translator')->trans($id, $parameters, $domain);
     }
+    
+    /**
+     * Envia un mensaje flash
+     * 
+     * @param array $type success|error
+     * @param type $message
+     * @param type $parameters
+     * @param type $domain
+     * @return type
+     */
+    protected function setFlash($type,$message,$parameters = array(),$domain = 'flashes')
+    {
+        return $this->get('session')->getBag('flashes')->add($type,$this->trans($message, $parameters, $domain));
+    }
 }
