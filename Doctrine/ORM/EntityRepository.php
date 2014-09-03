@@ -87,7 +87,7 @@ class EntityRepository extends BaseEntityRepository implements ContainerAwareInt
      */
     public function find($id)
     {
-        if(is_array($id) && $id['id']){
+        if(is_array($id) && isset($id['id'])){
             $id = $id['id'];
         }
         return $this
