@@ -109,4 +109,13 @@ class EntityRepository extends BaseEntityRepository implements ContainerAwareInt
         $pagerfanta->setContainer($this->container);
         return $pagerfanta;
     }
+    
+    public function getSecurityContext()
+    {
+        if (!$this->container->has('security.context')) {
+            throw new \LogicException('The SecurityBundle is not registered in your application.');
+        }
+
+        return $this->container->get('security.context');
+    }
 }
