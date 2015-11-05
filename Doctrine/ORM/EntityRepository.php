@@ -92,7 +92,7 @@ class EntityRepository extends BaseEntityRepository implements ContainerAwareInt
         }
         return $this
             ->getQueryBuilder()
-            ->andWhere($this->getAlias().'.id = '.intval($id))
+            ->andWhere($this->getAlias().".id = '".$id."'")
             ->getQuery()
             ->getOneOrNullResult()
         ;
