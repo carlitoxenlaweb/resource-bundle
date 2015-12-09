@@ -123,6 +123,8 @@ class ResourceController extends BaseResource
      */
     public function updateAction(Request $request)
     {
+        $saveAndClose = $request->get("save_and_close");
+        
         $resource = $this->findOr404($request);
         $form = $this->getForm($resource);
 
@@ -130,7 +132,9 @@ class ResourceController extends BaseResource
 
             $this->domainManager->update($resource);
 
-            return $this->redirectHandler->redirectTo($resource);
+            if($saveAndClose !== null){
+                return $this->redirectHandler->redirectTo($resource);
+            }
         }
 
         if ($this->config->isApiRequest()) {
