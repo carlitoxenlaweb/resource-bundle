@@ -87,6 +87,8 @@ class ResourceController extends BaseResource
      */
     public function createAction(Request $request)
     {
+        $saveAndClose = $request->get("save_and_close");
+        
         $resource = $this->createNew();
         $form = $this->getForm($resource);
 
@@ -97,7 +99,11 @@ class ResourceController extends BaseResource
                 return $this->redirectHandler->redirectToIndex();
             }
 
-            return $this->redirectHandler->redirectTo($resource);
+            if($saveAndClose !== null) {
+                return $this->redirectHandler->redirectTo($resource);
+            }else {
+                return $this->redirectHandler->redirectToRoute($this->config->getRedirectRoute('update'),['id' => $resource->getId()]);
+            }
         }
 
         if ($this->config->isApiRequest()) {
