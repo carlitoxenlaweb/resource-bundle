@@ -118,4 +118,13 @@ class EntityRepository extends BaseEntityRepository implements ContainerAwareInt
 
         return $this->container->get('security.context');
     }
+    
+    /**
+     * 
+     * @param array $criteria
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    protected function parseCriteria(array $criteria) {
+        return new \Doctrine\Common\Collections\ArrayCollection($criteria);
+    }
 }
