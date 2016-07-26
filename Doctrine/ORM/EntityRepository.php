@@ -127,4 +127,11 @@ class EntityRepository extends BaseEntityRepository implements ContainerAwareInt
     protected function parseCriteria(array $criteria) {
         return new \Doctrine\Common\Collections\ArrayCollection($criteria);
     }
+
+    //Mismo cable del eventManager y ContainerAwareInterface
+    public function __construct($em, $class)
+    {
+        parent::__construct($em, $class);
+        $this->container = $em->getEventManager()->getContainer(); //Quitar Cable!
+    }
 }
